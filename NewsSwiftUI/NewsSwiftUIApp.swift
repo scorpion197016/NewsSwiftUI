@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct NewsSwiftUIApp: App {
+    
     @StateObject var articleBookmarkVM = ArticleBookmarkViewModel.shared
     
     var body: some Scene {

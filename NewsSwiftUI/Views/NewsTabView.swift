@@ -8,35 +8,38 @@
 import SwiftUI
 
 struct NewsTabView: View {
-    @StateObject var articlesNewsVM = ArticleNewsViewModel()
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @StateObject var articleNewsVM: ArticleNewsViewModel
+    
+    init(articles: [Article]? = nil, category: Category = .general) {
+        self._articleNewsVM = StateObject(wrappedValue: ArticleNewsViewModel(articles: articles, selectedCategory: category))
+    }
     
     var body: some View {
-        NavigationView {
-            ArticleListView(articles: articles)
-                .overlay(overlayView)
-                .task(id: articlesNewsVM.fetchTaskToken, loadTask)
-                .refreshable(action: refreshTask)
-                .navigationTitle(articlesNewsVM.fetchTaskToken.category.text)
-                .navigationBarItems(trailing: menu)
-        }
+        ArticleListView(articles: articles)
+            .overlay(overlayView)
+            .task(id: articleNewsVM.fetchTaskToken, loadTask)
+            .refreshable(action: refreshTask)
+            .navigationTitle(articleNewsVM.fetchTaskToken.category.text)
+            .navigationBarItems(trailing: navigationBarItem)
     }
     
     @ViewBuilder
     private var overlayView: some View {
-        switch articlesNewsVM.phase {
-            case .empty:
-                ProgressView()
-            case .success(let articles) where articles.isEmpty:
-                EmptyPlaceholderView(text: "no articles", image: nil)
-            case .failure(let error):
-                RetryView(text: error.localizedDescription, retryAction: refreshTask)
-            default:
-                EmptyView()
+        
+        switch articleNewsVM.phase {
+        case .empty:
+            ProgressView()
+        case .success(let articles) where articles.isEmpty:
+            EmptyPlaceholderView(text: "No Articles", image: nil)
+        case .failure(let error):
+            RetryView(text: error.localizedDescription, retryAction: refreshTask)
+        default: EmptyView()
         }
     }
     
     private var articles: [Article] {
-        if case let .success(articles) = articlesNewsVM.phase {
+        if case let .success(articles) = articleNewsVM.phase {
             return articles
         } else {
             return []
@@ -45,36 +48,48 @@ struct NewsTabView: View {
     
     @Sendable
     private func loadTask() async {
-        await articlesNewsVM.loadArticles()
+        await articleNewsVM.loadArticles()
     }
-    
+
     @Sendable
     private func refreshTask() {
         DispatchQueue.main.async {
-            articlesNewsVM.fetchTaskToken = FetchTaskToken(category: articlesNewsVM.fetchTaskToken.category, token: Date())
+            articleNewsVM.fetchTaskToken = FetchTaskToken(category: articleNewsVM.fetchTaskToken.category, token: Date())
         }
     }
     
-    private var menu: some View {
-        Menu {
-            Picker("Category", selection: $articlesNewsVM.fetchTaskToken.category) {
-                ForEach(Category.allCases) {
-                    Text($0.text).tag($0)
-                }
+    @ViewBuilder
+    private var navigationBarItem: some View {
+        switch horizontalSizeClass {
+        case .regular:
+            Button(action: refreshTask) {
+                Image(systemName: "arrow.clockwise")
+                    .imageScale(.large)
             }
-        } label: {
-            Image(systemName: "fiberchannel")
-                .imageScale(.large)
+            
+        default:
+            Menu {
+                Picker("Category", selection: $articleNewsVM.fetchTaskToken.category) {
+                    ForEach(Category.allCases) {
+                        Text($0.text).tag($0)
+                    }
+                }
+            } label: {
+                Image(systemName: "fiberchannel")
+                    .imageScale(.large)
+            }
         }
     }
+
 }
 
 struct NewsTabView_Previews: PreviewProvider {
     
     @StateObject static var articleBookmarkVM = ArticleBookmarkViewModel.shared
+
     
     static var previews: some View {
-        NewsTabView(articlesNewsVM: ArticleNewsViewModel(articles: Article.previewData))
+        NewsTabView(articles: Article.previewData)
             .environmentObject(articleBookmarkVM)
     }
 }

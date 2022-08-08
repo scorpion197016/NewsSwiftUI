@@ -7,19 +7,17 @@
 
 import SwiftUI
 
-
 struct SearchTabView: View {
     
     @StateObject var searchVM = ArticleSearchViewModel.shared
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     
     var body: some View {
-        NavigationView {
-            ArticleListView(articles: articles)
-                .overlay(overlayView)
-                .navigationTitle("Search")
-        }
-        .searchable(text: $searchVM.searchQuery) { suggestionsView }
-        .onChange(of: searchVM.searchQuery) { newValue in
+        ArticleListView(articles: articles)
+            .overlay(overlayView)
+            .navigationTitle("Search")
+            .searchable(text: $searchVM.searchQuery, placement: horizontalSizeClass  == .regular ? .navigationBarDrawer : .automatic) { suggestionsView }
+            .onChange(of: searchVM.searchQuery) { newValue in
             if newValue.isEmpty {
                 searchVM.phase = .empty
             }
@@ -84,9 +82,12 @@ struct SearchTabView: View {
     }
 }
 
-
 struct SearchTabView_Previews: PreviewProvider {
+    
+    @StateObject static var bookmarkVM = ArticleBookmarkViewModel.shared
+    
     static var previews: some View {
         SearchTabView()
+            .environmentObject(bookmarkVM)
     }
 }

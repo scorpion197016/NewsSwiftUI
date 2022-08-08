@@ -13,13 +13,10 @@ struct BookmarkTabView: View {
     
     var body: some View {
         let articles = self.articles
-        
-        NavigationView {
-            ArticleListView(articles: articles)
-                .overlay(overlayView(isEmpty: articles.isEmpty))
-                .navigationTitle("Saved Articles")
-        }
-        .searchable(text: $searchText)
+        ArticleListView(articles: articles)
+            .overlay(overlayView(isEmpty: articles.isEmpty))
+            .navigationTitle("Saved Articles")
+            .searchable(text: $searchText)
     }
     
     private var articles: [Article] {
@@ -43,7 +40,6 @@ struct BookmarkTabView: View {
 
 struct BookmarkTabView_Previews: PreviewProvider {
     @StateObject static var articleBookmarkVM = ArticleBookmarkViewModel.shared
-    
     static var previews: some View {
         BookmarkTabView()
             .environmentObject(articleBookmarkVM)

@@ -30,6 +30,10 @@
 		2EBA68E9289BDD780024284A /* NewsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA68E8289BDD780024284A /* NewsTabView.swift */; };
 		2EBA68EB289BF3C90024284A /* SearchTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA68EA289BF3C90024284A /* SearchTabView.swift */; };
 		2EBA68ED289BF48C0024284A /* SearchHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA68EC289BF48C0024284A /* SearchHistoryListView.swift */; };
+		2EBA68EF289C35C30024284A /* SideBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA68EE289C35C30024284A /* SideBarContentView.swift */; };
+		2EBA68F1289C36080024284A /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA68F0289C36080024284A /* MenuItem.swift */; };
+		2EBA68F3289C39820024284A /* TabMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA68F2289C39820024284A /* TabMenuItem.swift */; };
+		2EBA68F5289C3C9E0024284A /* TabContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA68F4289C3C9E0024284A /* TabContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +61,10 @@
 		2EBA68E8289BDD780024284A /* NewsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTabView.swift; sourceTree = "<group>"; };
 		2EBA68EA289BF3C90024284A /* SearchTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabView.swift; sourceTree = "<group>"; };
 		2EBA68EC289BF48C0024284A /* SearchHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryListView.swift; sourceTree = "<group>"; };
+		2EBA68EE289C35C30024284A /* SideBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarContentView.swift; sourceTree = "<group>"; };
+		2EBA68F0289C36080024284A /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		2EBA68F2289C39820024284A /* TabMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMenuItem.swift; sourceTree = "<group>"; };
+		2EBA68F4289C3C9E0024284A /* TabContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +134,8 @@
 				2E6B6A85289A6EFD00E7FD95 /* Category.swift */,
 				2E6B6A87289A6FB300E7FD95 /* DataStore.swift */,
 				2E6B6A89289A71D300E7FD95 /* NewsApiResponse.swift */,
+				2EBA68F0289C36080024284A /* MenuItem.swift */,
+				2EBA68F2289C39820024284A /* TabMenuItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +162,8 @@
 				2EBA68E8289BDD780024284A /* NewsTabView.swift */,
 				2EBA68EA289BF3C90024284A /* SearchTabView.swift */,
 				2EBA68EC289BF48C0024284A /* SearchHistoryListView.swift */,
+				2EBA68EE289C35C30024284A /* SideBarContentView.swift */,
+				2EBA68F4289C3C9E0024284A /* TabContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,10 +243,12 @@
 				2E6B6A88289A6FB400E7FD95 /* DataStore.swift in Sources */,
 				2E6B6A8F289BBB0C00E7FD95 /* ArticleNewsVM.swift in Sources */,
 				2E6B6A86289A6EFD00E7FD95 /* Category.swift in Sources */,
+				2EBA68F5289C3C9E0024284A /* TabContentView.swift in Sources */,
 				2E6B6A72289A688500E7FD95 /* ContentView.swift in Sources */,
 				2EBA68EB289BF3C90024284A /* SearchTabView.swift in Sources */,
 				2EBA68DF289BD5450024284A /* ArticleListView.swift in Sources */,
 				2EBA68E1289BD6530024284A /* SafariView.swift in Sources */,
+				2EBA68EF289C35C30024284A /* SideBarContentView.swift in Sources */,
 				2E6B6A91289BC3F800E7FD95 /* ArticleSearchVM.swift in Sources */,
 				2E6B6A94289BC9F800E7FD95 /* ArticleRowView.swift in Sources */,
 				2EBA68E9289BDD780024284A /* NewsTabView.swift in Sources */,
@@ -244,7 +258,9 @@
 				2EBA68E3289BD95B0024284A /* EmptyPlaceholderView.swift in Sources */,
 				2E6B6A8A289A71D300E7FD95 /* NewsApiResponse.swift in Sources */,
 				2E6B6A70289A688500E7FD95 /* NewsSwiftUIApp.swift in Sources */,
+				2EBA68F3289C39820024284A /* TabMenuItem.swift in Sources */,
 				2EBA68ED289BF48C0024284A /* SearchHistoryListView.swift in Sources */,
+				2EBA68F1289C36080024284A /* MenuItem.swift in Sources */,
 				2EBA68E7289BDB360024284A /* BookmarkTabView.swift in Sources */,
 				2E6B6A8D289BACE400E7FD95 /* ArticleBookmarkVM.swift in Sources */,
 			);

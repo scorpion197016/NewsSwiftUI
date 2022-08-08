@@ -8,28 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @AppStorage("item_selection") var selectedMenuItemId: MenuItem.ID?
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     var body: some View {
-        TabView {
-            NewsTabView()
-                .tabItem {
-                    Label("News", systemImage: "newspaper")
-                }
-            
-            SearchTabView()
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
-            
-            BookmarkTabView()
-                .tabItem {
-                    Label("Saved", systemImage: "bookmark")
-                }
+        switch horizontalSizeClass {
+            case .regular:
+                SidebarContentView(selectedMenuItemId: $selectedMenuItemId)
+            default:
+                TabContentView(selectedMenuItemId: $selectedMenuItemId)
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            ContentView()
+            ContentView()
+                .previewDevice("iPhone 13 Pro")
+        }
     }
 }

@@ -8,13 +8,53 @@
 import SwiftUI
 
 struct ArticleRowView: View {
+    
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @EnvironmentObject var articleBookmarkVM: ArticleBookmarkViewModel
     
     let article: Article
-    
     var body: some View {
+        switch horizontalSizeClass {
+        case .regular:
+            GeometryReader { contentView(proxy: $0) }
+        default:
+            contentView()
+        }
+    }
+    
+    @ViewBuilder
+    private func contentView(proxy: GeometryProxy? = nil) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            articleImage
+            AsyncImage(url: article.imageURL) { phase in
+                switch phase {
+                case .empty:
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                    
+                case .failure:
+                    HStack {
+                        Spacer()
+                        Image(systemName: "photo")
+                            .imageScale(.large)
+                        Spacer()
+                    }
+                    
+                    
+                @unknown default:
+                    fatalError()
+                }
+            }
+            .asyncImageFrame(horizontalSizeClass: horizontalSizeClass ?? .compact)
+            .background(Color.gray.opacity(0.6))
+            .clipped()
             
             VStack(alignment: .leading, spacing: 8) {
                 Text(article.title)
@@ -24,6 +64,10 @@ struct ArticleRowView: View {
                 Text(article.descriptionText)
                     .font(.subheadline)
                     .lineLimit(2)
+                
+                if horizontalSizeClass == .regular {
+                    Spacer()
+                }
                 
                 HStack {
                     Text(article.captionText)
@@ -41,7 +85,7 @@ struct ArticleRowView: View {
                     .buttonStyle(.bordered)
                     
                     Button {
-                        presentShareSheet(url: article.articleURL)
+                        presentShareSheet(url: article.articleURL, proxy: proxy)
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                     }
@@ -49,36 +93,8 @@ struct ArticleRowView: View {
                 }
             }
             .padding([.horizontal, .bottom])
+            
         }
-    }
-    
-    private var articleImage: some View {
-        AsyncImage(url: article.imageURL) { phase in
-            switch phase {
-                case .empty:
-                    HStack {
-                        Spacer()
-                        ProgressView()
-                        Spacer()
-                    }
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                case .failure:
-                    HStack {
-                        Spacer()
-                        Image(systemName: "photo")
-                            .imageScale(.large)
-                        Spacer()
-                    }
-                @unknown default:
-                    fatalError()
-            }
-        }
-        .frame(minHeight: 200, maxHeight: 300)
-        .background(Color.gray.opacity(0.3))
-        .clipped()
     }
     
     private func toggleBookmark(for article: Article) {
@@ -90,8 +106,24 @@ struct ArticleRowView: View {
     }
 }
 
+fileprivate extension View {
+    
+    @ViewBuilder
+    func asyncImageFrame(horizontalSizeClass: UserInterfaceSizeClass) -> some View {
+        switch horizontalSizeClass {
+        case .regular:
+            frame(height: 180)
+        default:
+            frame(minHeight: 200, maxHeight: 300)
+        }
+    }
+    
+}
+
 struct ArticleRowView_Previews: PreviewProvider {
+    
     @StateObject static var articleBookmarkVM = ArticleBookmarkViewModel.shared
+
     static var previews: some View {
         NavigationView {
             List {
