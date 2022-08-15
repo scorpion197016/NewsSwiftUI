@@ -9,13 +9,19 @@ import Foundation
 
 fileprivate let relativeDateFormatter = RelativeDateTimeFormatter()
 
+let activityTypeViewKey = "com.alfianlosari.xcanews.view"
+let activityURLKey = "xcanews.url.key"
+
 struct Article {
     
     let id = UUID()
+    
     let source: Source
+    
     let title: String
     let url: String
     let publishedAt: Date
+    
     let author: String?
     let description: String?
     let urlToImage: String?
@@ -71,6 +77,13 @@ extension Article {
         let apiResponse = try! jsonDecoder.decode(NewsAPIResponse.self, from: data)
         return apiResponse.articles ?? []
     }
+    
+    static var previewCategoryArticles: [CategoryArticles] {
+            let articles = previewData
+            return Category.allCases.map {
+                .init(category: $0, articles: articles.shuffled())
+            }
+        }
 }
 
 

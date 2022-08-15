@@ -31,21 +31,32 @@ class ArticleBookmarkViewModel: ObservableObject {
         guard !isBookmarked(for: article) else {
             return
         }
-        
         bookmarks.insert(article, at: 0)
-        bookmarkUpdate()
+        bookmarkUpdated()
     }
     
     func removeBookmark(for article: Article) {
-        guard let index = bookmarks.firstIndex(where: {$0.id == article.id}) else {
+        guard let index = bookmarks.firstIndex(where: { $0.id == article.id }) else {
             return
         }
-        
         bookmarks.remove(at: index)
-        bookmarkUpdate()
+        bookmarkUpdated()
     }
     
-    private func bookmarkUpdate() {
+    func removeAllBookmarks() {
+        bookmarks.removeAll()
+        bookmarkUpdated()
+    }
+    
+    func toggleBookmark(for article: Article) {
+        if isBookmarked(for: article) {
+            removeBookmark(for: article)
+        } else {
+            addBookmark(for: article)
+        }
+    }
+    
+    private func bookmarkUpdated() {
         let bookmarks = self.bookmarks
         Task {
             await bookmarkStore.save(bookmarks)

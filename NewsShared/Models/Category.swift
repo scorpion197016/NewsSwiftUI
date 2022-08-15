@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: String, CaseIterable {
+enum Category: String, CaseIterable, Codable {
     case general
     case business
     case technology
@@ -42,9 +42,12 @@ enum Category: String, CaseIterable {
         }
     }
     
-    static var menuItems: [MenuItem] {
-        allCases.map { .category($0) }
+    var sortIndex: Int {
+        Self.allCases.firstIndex(of: self) ?? 0
     }
+    static var menuItems: [MenuItem] {
+            allCases.map { .category($0) }
+        }
 }
 
 extension Category: Identifiable {
