@@ -4,15 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>NewsIOSWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>NewsMacOS.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 		<key>NewsMacOSWidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
@@ -26,6 +33,13 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>NewsWidgetSharedExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>aokdfnijdsv.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
@@ -36,6 +50,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2E6B6A6B289A688500E7FD95</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2ED55B2628AB7B5500CC8F41</key>
 		<dict>
 			<key>primary</key>
@@ -47,6 +66,11 @@
 			<true/>
 		</dict>
 		<key>2ED55B7528ABC39D00CC8F41</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2ED55BCE28ABC5F900CC8F41</key>
 		<dict>
 			<key>primary</key>
 			<true/>
