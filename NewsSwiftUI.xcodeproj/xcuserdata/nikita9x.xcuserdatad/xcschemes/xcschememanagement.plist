@@ -4,6 +4,18 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>NewsMacOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>NewsMacOSWidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>NewsMacSwiftUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,7 +24,32 @@
 		<key>NewsSwiftUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
+		</dict>
+		<key>aokdfnijdsv.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2ED55B2628AB7B5500CC8F41</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2ED55B5A28ABC2B600CC8F41</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2ED55B7528ABC39D00CC8F41</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

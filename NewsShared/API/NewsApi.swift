@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct NewsApi {
     static let shared = NewsApi()
